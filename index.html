@@ -1,13 +1,440 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alex Larionov — Résumé</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+
+  /* ============ Tokens ============ */
+  :root{
+    --ink:        #0E1116;
+    --surface:    #161B22;
+    --surface-2:  #1C222B;
+    --line:       #2A313C;
+    --text:       #E7E9EC;
+    --text-muted: #9099A8;
+    --accent:     #5EEAD4;
+    --accent-dim: #2E4B47;
+
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body:    'Inter', sans-serif;
+    --font-mono:    'JetBrains Mono', monospace;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+
+  body{
+    margin:0;
+    background: var(--ink);
+    color: var(--text);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a{ color: inherit; }
+  a:focus-visible, button:focus-visible{
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  img{ max-width: 100%; display: block; }
+
+  .wrap{
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  section{
+    padding: 88px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  section:last-of-type{ border-bottom: none; }
+
+  h1, h2, h3{
+    font-family: var(--font-display);
+    font-weight: 600;
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+
+  .eyebrow-line{
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--accent);
+    margin: 0 0 10px;
+  }
+
+  .section-title{
+    font-size: 1.6rem;
+    margin-bottom: 36px;
+  }
+
+  p{ margin: 0 0 16px; max-width: 62ch; color: var(--text-muted); }
+  p:last-child{ margin-bottom: 0; }
+
+  /* ============ Nav ============ */
+  header.site-nav{
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: rgba(14,17,22,0.85);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner{
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 18px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .nav-mark{
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    color: var(--text);
+  }
+  .nav-mark span{ color: var(--accent); }
+  .nav-links{
+    display: flex;
+    gap: 28px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .nav-links a{
+    font-size: 0.9rem;
+    text-decoration: none;
+    color: var(--text-muted);
+    transition: color 0.15s ease;
+  }
+  .nav-links a:hover{ color: var(--text); }
+
+  /* ============ Hero ============ */
+  .hero{
+    padding-top: 76px;
+    padding-bottom: 76px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 56px;
+    align-items: center;
+  }
+  .hero-photo{
+    width: 168px;
+    height: 168px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid var(--line);
+    box-shadow: 0 0 0 6px var(--surface);
+  }
+  .hero h1{
+    font-size: clamp(2.1rem, 4vw, 3rem);
+    line-height: 1.1;
+  }
+  .hero .role{
+    font-family: var(--font-body);
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    margin-top: 12px;
+    max-width: 46ch;
+  }
+  .hero .handle{
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--accent);
+    margin-top: 18px;
+  }
+  .cta-row{
+    display: flex;
+    gap: 12px;
+    margin-top: 28px;
+    flex-wrap: wrap;
+  }
+  .btn{
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    padding: 10px 18px;
+    border-radius: 6px;
+    border: 1px solid var(--line);
+    transition: border-color 0.15s ease, background 0.15s ease;
+  }
+  .btn.primary{
+    background: var(--accent);
+    color: #06201C;
+    border-color: var(--accent);
+  }
+  .btn.primary:hover{ background: #7FF2DE; }
+  .btn.ghost:hover{ border-color: var(--accent); color: var(--accent); }
+
+  /* ============ About ============ */
+  .about-grid{
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 48px;
+  }
+  .fact-list{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+  }
+  .fact-list li{
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--text-muted);
+  }
+  .fact-list li:last-child{ border-bottom: none; }
+  .fact-list span.k{ color: var(--text); }
+
+  /* ============ Focus cards ============ */
+  .focus-grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+  .focus-card{
+    background: var(--ink);
+    padding: 28px 24px;
+  }
+  .focus-card h3{
+    font-size: 1rem;
+    margin-bottom: 8px;
+  }
+  .focus-card p{ font-size: 0.92rem; margin: 0; }
+
+  /* ============ Education / timeline ============ */
+  .timeline{
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .tl-item{
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 24px;
+    padding: 24px 0;
+    border-top: 1px solid var(--line);
+  }
+  .tl-item:first-child{ border-top: none; }
+  .tl-when{
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--accent);
+    padding-top: 3px;
+  }
+  .tl-body h3{
+    font-size: 1.05rem;
+    margin-bottom: 6px;
+  }
+  .tl-body p{ margin: 0; font-size: 0.95rem; }
+
+  /* ============ Building now ============ */
+  .now-card{
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 28px 28px;
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+  }
+  .now-dot{
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    background: var(--accent);
+    margin-top: 8px;
+    flex-shrink: 0;
+    box-shadow: 0 0 0 4px var(--accent-dim);
+  }
+  .now-card h3{ font-size: 1rem; margin-bottom: 6px; }
+  .now-card p{ margin: 0; font-size: 0.93rem; }
+  .now-card a{ color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent-dim); }
+  .now-card a:hover{ border-color: var(--accent); }
+
+  /* ============ Contact ============ */
+  .contact-row{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 8px;
+  }
+  .contact-chip{
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    text-decoration: none;
+    color: var(--text);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 10px 16px;
+    transition: border-color 0.15s ease, color 0.15s ease;
+  }
+  .contact-chip:hover{ border-color: var(--accent); color: var(--accent); }
+
+  footer{
+    padding: 32px 0 56px;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--text-muted);
+  }
+
+  /* ============ Responsive ============ */
+  @media (max-width: 680px){
+    .wrap{ padding: 0 20px; }
+    section{ padding: 56px 0; }
+    .hero{ grid-template-columns: 1fr; text-align: left; padding-top: 48px; }
+    .hero-photo{ width: 108px; height: 108px; }
+    .about-grid{ grid-template-columns: 1fr; }
+    .focus-grid{ grid-template-columns: 1fr; }
+    .tl-item{ grid-template-columns: 1fr; gap: 6px; }
+    .nav-links{ gap: 16px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+    *{ transition: none !important; }
+  }
+</style>
 </head>
 <body>
-    <h1>Привіт! Це мій новий сайт</h1>
- <p>Я створив цей каркас автоматично у VS Code за допомогою Emmet.</p>
- <p>Сайт опубліковано через 
+
+<header class="site-nav">
+  <div class="nav-inner">
+    <span class="nav-mark">arjsw<span>.</span>dev</span>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#focus">Focus</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#building">Building</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero wrap" id="top">
+    <div>
+      <p class="eyebrow-line">Résumé</p>
+      <h1>Alex Larionov</h1>
+      <p class="role">4th-year Computer Science student in the NTU Double Degree Programme, learning to build software and figuring out where in the stack I want to live.</p>
+      <p class="handle">github.com/Arjsw</p>
+      <div class="cta-row">
+        <a class="btn primary" href="#contact">Get in touch</a>
+        <a class="btn ghost" href="https://github.com/Arjsw" target="_blank" rel="noopener">View GitHub</a>
+      </div>
+    </div>
+    <img class="hero-photo" src="https://avatars.githubusercontent.com/u/128159276?v=4" alt="Portrait of Alex Larionov">
+  </section>
+ 
+  <!-- ============ ABOUT ============ -->
+  <section class="wrap" id="about">
+    <p class="eyebrow-line">01 — About</p>
+    <h2 class="section-title">A bit about me</h2>
+    <div class="about-grid">
+      <div>
+        <p>I'm a Computer Science student on NTU's Double Degree Programme, currently in my fourth year. Most of my time goes into coursework, side projects, and slowly turning this page into a proper personal site.</p>
+        <p>I was drawn to computer science because I enjoy understanding how things work and turning ideas into working software. I especially like solving practical problems through programming, working with databases, and building applications that are useful and easy to use.</p>
+        <p>Outside of coursework, I enjoy  exploring new technologies,exercising in gym, and working on personal programming projects.</p>
+      </div>
+      <ul class="fact-list">
+        <li><span class="k">Status</span><span>4th-year student</span></li>
+        <li><span class="k">Field</span><span>Computer Science</span></li>
+        <li><span class="k">Programme</span><span>NTU Double Degree</span></li>
+        <li><span class="k">Based in</span><span>Dnipro</span></li>
+        <li><span class="k">GitHub</span><span>@Arjsw</span></li>
+      </ul>
+    </div>
+  </section>
+ 
+  <!-- ============ FOCUS ============ -->
+  <section class="wrap" id="focus">
+    <p class="eyebrow-line">02 — Focus</p>
+    <h2 class="section-title">What I'm working on</h2>
+    <div class="focus-grid">
+      <div class="focus-card">
+        <h3>Software Engineering</h3>
+        <p>I work with Python, PHP, JavaScript, and SQL, developing applications and solving programming problems. I have experience with algorithms, databases, Git, and building software projects as part of my coursework.</p>
+      </div>
+      <div class="focus-card">
+        <h3>Web Development</h3>
+        <p>I work with HTML, CSS, JavaScript, PHP, and MySQL, including building web applications with database integration. I also have experience with Django and the MTV architecture.</p>
+      </div>
+      <div class="focus-card">
+        <h3>Data &amp; Problem Solving</h3>
+        <p>I am interested in data analysis, statistics,  and optimization. I enjoy working with data, comparing different approaches, and finding efficient solutions to practical problems.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ EDUCATION ============ -->
+  <section class="wrap" id="education">
+    <p class="eyebrow-line">03 — Education</p>
+    <h2 class="section-title">Education</h2>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-when">Year 4</div>
+        <div class="tl-body">
+          <h3>NTU Double Degree Programme</h3>
+          <p>B.Sc. Computer Science — currently in the final year of the programme. <!-- EDIT ME: add your second degree, specialisation or GPA if you'd like to include it. --></p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-when"><!-- EDIT ME --></div>
+        <div class="tl-body">
+          <h3><!-- EDIT ME -->Secondary education</h3>
+          <p>Completed 11 years of school</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BUILDING NOW ============ -->
+  <section class="wrap" id="building">
+    <p class="eyebrow-line">04 — Building</p>
+    <h2 class="section-title">Currently building</h2>
+    <div class="now-card">
+      <span class="now-dot"></span>
+      <div>
+        <h3>arjsw.github.io</h3>
+        <p>This page — a personal site hosted on GitHub Pages. Follow along at <a href="https://github.com/Arjsw/arjsw.github.io" target="_blank" rel="noopener">github.com/Arjsw/arjsw.github.io</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT ============ -->
+  <section class="wrap" id="contact">
+    <p class="eyebrow-line">05 — Contact</p>
+    <h2 class="section-title">Get in touch</h2>
+    <p>The best way to reach me is below — happy to talk about projects, coursework, or opportunities.</p>
+    <div class="contact-row">
+      <a class="contact-chip" href="https://github.com/Arjsw" target="_blank" rel="noopener">GitHub</a>
+      <a class="contact-chip" href="mailto:your.email@example.com"><!-- EDIT ME -->your.email@example.com</a>
+      <a class="contact-chip" href="#"><!-- EDIT ME: add LinkedIn or another profile, or delete this chip -->LinkedIn</a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  © 2026 Alex Larionov — built with HTML &amp; CSS
+</footer>
+
 </body>
 </html>
