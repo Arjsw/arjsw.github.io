@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 450">
+<rect width="600" height="450" rx="30" fill="#10182d"/>
+<circle cx="300" cy="150" r="85" fill="#7c8cff" opacity=".25"/>
+<circle cx="300" cy="145" r="55" fill="#9ba6ff"/>
+<path d="M210 365c15-92 165-92 180 0" fill="#7c8cff"/>
+<rect x="115" y="325" width="370" height="18" rx="9" fill="#252e52"/>
+<rect x="175" y="365" width="250" height="12" rx="6" fill="#252e52"/>
+<text x="300" y="410" text-anchor="middle" fill="#aeb6ce" font-family="Arial" font-size="22">WEB DEVELOPER</text>
+</svg>
