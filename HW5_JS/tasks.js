@@ -10,7 +10,7 @@ function bubbleSort(arr) {
 
         for (let j = 0; j < result.length - 1 - i; j++) {
             if (result[j] > result[j + 1]) {
-                // Міняємо елементи місцями
+                
                 let temp = result[j];
                 result[j] = result[j + 1];
                 result[j + 1] = temp;
